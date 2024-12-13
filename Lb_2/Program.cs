@@ -2,28 +2,81 @@
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        Console.WriteLine("Введіть перше число: ");
-        string input1 = Console.ReadLine();
-
-        Console.WriteLine("Введіть друге число");
-        string input2 = Console.ReadLine();
-
-        double num1 = Convert.ToDouble(input1);
-        double num2 = Convert.ToDouble(input2);
-
-        Console.WriteLine($"Сума: {num1 + num2}");
-        Console.WriteLine($"Різниця: {num1 - num2}");
-        Console.WriteLine($"Добуток: {num1 * num2}");
-
-        if (num2 != 0)
+        while (true)
         {
-            Console.WriteLine($"Частка: {num1 / num2}");
-        }
-        else
-        {
-            Console.WriteLine("Помилка: ділення на нуль неможливе!");
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            Console.WriteLine("Оберіть операцію:");
+            Console.WriteLine("1. Додавання");
+            Console.WriteLine("2. Віднімання");
+            Console.WriteLine("3. Множення");
+            Console.WriteLine("4. Ділення");
+            Console.WriteLine("5. Вихід");
+            Console.Write("Ваш вибір: ");
+
+            string choice = Console.ReadLine();
+
+            if (choice == "5")
+            {
+                Console.WriteLine("Дякуємо за використання програми! До побачення.");
+                break;
+            }
+
+            Console.Write("Введіть перше число: ");
+            if (!double.TryParse(Console.ReadLine(), out double num1))
+            {
+                Console.WriteLine("Неправильний ввід. Натисніть будь-яку клавішу для повернення до меню.");
+                Console.ReadKey();
+                continue;
+            }
+
+            Console.Write("Введіть друге число: ");
+            if (!double.TryParse(Console.ReadLine(), out double num2))
+            {
+                Console.WriteLine("Неправильний ввід. Натисніть будь-яку клавішу для повернення до меню.");
+                Console.ReadKey();
+                continue;
+            }
+
+            double result;
+            switch (choice)
+            {
+                case "1":
+                    result = num1 + num2;
+                    Console.WriteLine($"Результат: {num1} + {num2} = {result}");
+                    break;
+
+                case "2":
+                    result = num1 - num2;
+                    Console.WriteLine($"Результат: {num1} - {num2} = {result}");
+                    break;
+
+                case "3":
+                    result = num1 * num2;
+                    Console.WriteLine($"Результат: {num1} * {num2} = {result}");
+                    break;
+
+                case "4":
+                    if (num2 == 0)
+                    {
+                        Console.WriteLine("Помилка: ділення на нуль неможливе.");
+                    }
+                    else
+                    {
+                        result = num1 / num2;
+                        Console.WriteLine($"Результат: {num1} / {num2} = {result}");
+                    }
+                    break;
+
+                default:
+                    Console.WriteLine("Неправильний вибір. Спробуйте ще раз.");
+                    break;
+            }
+
+            Console.WriteLine("\nНатисніть будь-яку клавішу для повернення до меню...");
+            Console.ReadKey();
         }
     }
 }
